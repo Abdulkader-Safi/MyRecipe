@@ -4,7 +4,6 @@ import { Welcome, Home, Login, Register, ForgetPassword } from "../pages";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/slices/authSlices";
-import App from "../App.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +19,6 @@ const AppNavigation = () => {
   ) : (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen options={{ headerShown: false }} name="MainApp" component={App} />
         <Stack.Screen options={{ headerShown: false }} name="Welcome" component={Welcome} />
         <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
         <Stack.Screen options={{ headerShown: false }} name="Register" component={Register} />

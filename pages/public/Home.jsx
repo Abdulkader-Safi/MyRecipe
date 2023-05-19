@@ -29,7 +29,6 @@ const Home = () => {
             userID: user.uid,
           })
         );
-        // dispatch(SET_IS_ADMIN());
       } else {
         setDisplayName("");
         dispatch(REMOVE_ACTIVE_USER());
@@ -40,7 +39,7 @@ const Home = () => {
   return (
     <ScreenWrapper>
       <View className="h-screen flex justify-around items-center bg-bg-color">
-        <Text>Hello World</Text>
+        <Text>{displayName}</Text>
       </View>
     </ScreenWrapper>
   );

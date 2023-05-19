@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, KeyboardAvoidingView, TextInput } from "react-native";
 import React, { useState } from "react";
-import { ScreenWrapper } from "../../components";
+import { Loading, ScreenWrapper } from "../../components";
 import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./../../firebase";
@@ -11,20 +11,25 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const HandleLogin = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         setEmail("");
         setPassword("");
 
         dispatch(SET_LOGGED_IN());
+        setIsLoading(false);
         navigation.navigate("Home");
       })
       .catch((err) => {
+        setIsLoading(false);
         alert(err.message);
       });
   };
@@ -37,6 +42,8 @@ const Login = () => {
   return (
     <KeyboardAvoidingView className="flex-1 justify-center items-center" behavior="padding">
       <ScreenWrapper>
+        {isLoading && <Loading />}
+
         <View className="h-screen flex justify-between items-center bg-bg-color">
           <View className="flex-col justify-center items-center mt-10"></View>
           <View className="flex-col justify-center items-center mt-10">

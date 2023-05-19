@@ -22,7 +22,7 @@ const Welcome = () => {
           <Text className="text-4xl text-wlc-color">Welcome</Text>
           <Image className="h-72 w-72" source={require("./../../assets/images/Main.png")} />
         </View>
-        <View className="w-4/5 h-2/6 flex justify-around">
+        <View className="w-4/5 h-1/4 flex justify-around">
           <View className="my-3">
             <Text className="mb-2 text-txt-gold">Please Login</Text>
             <TouchableOpacity
