@@ -1,12 +1,15 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { ScreenWrapper } from "../../components";
 
-const login = () => {
+const Login = () => {
   return (
-    <View>
-      <Text>login</Text>
-    </View>
+    <ScreenWrapper>
+      <View className="h-full flex justify-around items-center bg-bg-color">
+        <Text>Login</Text>
+      </View>
+    </ScreenWrapper>
   );
 };
 
-export default login;
+export default Login;

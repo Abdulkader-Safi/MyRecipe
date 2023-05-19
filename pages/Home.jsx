@@ -1,15 +1,15 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { ScreenWrapper } from "../../components";
+import { ScreenWrapper } from "../components";
 
-const Register = () => {
+const Home = () => {
   return (
     <ScreenWrapper>
       <View className="h-full flex justify-around items-center bg-bg-color">
-        <Text>Registration</Text>
+        <Text>Hello World</Text>
       </View>
     </ScreenWrapper>
   );
 };
 
-export default Register;
+export default Home;
