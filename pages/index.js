@@ -1,5 +1,5 @@
-import Welcome from "./Welcome";
-import Home from "./Home";
+import Welcome from "./public/Welcome";
+import Home from "./public/Home";
 
 // auth
 import Login from "./auth/Login";

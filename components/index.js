@@ -1,3 +1,3 @@
-import ScreenWrapper from "./ScreenWrapper";
+import ScreenWrapper from "./public/ScreenWrapper";
 
 export { ScreenWrapper };

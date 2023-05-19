@@ -3,9 +3,11 @@ import React from "react";
 
 const AuthEmailSent = () => {
   return (
-    <View>
-      <Text>AuthEmailSent</Text>
-    </View>
+    <ScreenWrapper>
+      <View className="h-screen flex justify-around items-center bg-bg-color">
+        <Text>AuthEmailSent</Text>
+      </View>
+    </ScreenWrapper>
   );
 };
 

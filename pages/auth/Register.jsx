@@ -5,7 +5,7 @@ import { ScreenWrapper } from "../../components";
 const Register = () => {
   return (
     <ScreenWrapper>
-      <View className="h-full flex justify-around items-center bg-bg-color">
+      <View className="h-screen flex justify-around items-center bg-bg-color">
         <Text>Registration</Text>
       </View>
     </ScreenWrapper>

@@ -13,6 +13,9 @@ export const authSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
+    SET_LOGGED_IN: (state) => {
+      state.isLoggedIn = true;
+    },
     SET_ACTIVE_USER: (state, action) => {
       const { email, userName, userID } = action.payload;
       state.isLoggedIn = true;
@@ -29,7 +32,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } = authSlice.actions;
+export const { SET_LOGGED_IN, SET_ACTIVE_USER, REMOVE_ACTIVE_USER } = authSlice.actions;
 
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectEmail = (state) => state.auth.email;
