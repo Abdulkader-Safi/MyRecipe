@@ -2,30 +2,29 @@ import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ScreenWrapper } from "./../../components";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../../redux/slices/authSlices";
 import { useDispatch } from "react-redux";
+import { collection, doc, getDoc } from "firebase/firestore";
 
-const Home = () => {
+const HomeScreen = () => {
   const [displayName, setDisplayName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        if (user.displayName == null) {
-          const u1 = user.email?.slice(0, -10);
-          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
-          setDisplayName(uName);
-        } else {
-          setDisplayName(user.displayName);
-        }
+        const userRef = doc(collection(db, "users"), user?.uid);
+        const getUserData = getDoc(userRef);
+        const userData = (await getUserData).data();
 
+        setDisplayName(userData.fullName);
         dispatch(
           SET_ACTIVE_USER({
             email: user.email,
-            userName: user.displayName ? user.displayName : displayName,
+            userName: displayName,
             userID: user.uid,
           })
         );
@@ -39,10 +38,10 @@ const Home = () => {
   return (
     <ScreenWrapper>
       <View className="h-screen flex justify-around items-center bg-bg-color">
-        <Text>{displayName}</Text>
+        <Text>HomeScreen</Text>
       </View>
     </ScreenWrapper>
   );
 };
 
-export default Home;
+export default HomeScreen;

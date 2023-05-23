@@ -26,7 +26,7 @@ const Login = () => {
 
         dispatch(SET_LOGGED_IN());
         setIsLoading(false);
-        navigation.navigate("Home");
+        navigation.navigate("HomeScreen");
       })
       .catch((err) => {
         setIsLoading(false);

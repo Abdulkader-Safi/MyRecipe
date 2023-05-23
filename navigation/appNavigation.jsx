@@ -1,10 +1,21 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Welcome, Home, Login, Register, ForgetPassword } from "../pages";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  Welcome,
+  Login,
+  Register,
+  ForgetPassword,
+  HomeScreen,
+  ReadyRecipeScreen,
+  PublicRecipesScreen,
+  ProfileAndSetting,
+} from "../pages";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/slices/authSlices";
 
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
@@ -12,9 +23,40 @@ const AppNavigation = () => {
 
   return isLoggedIn ? (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-      </Stack.Navigator>
+      <Tab.Navigator initialRouteName="HomeScreen">
+        <Tab.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: "Home",
+            tabBarIcon: () => {},
+          }}
+        />
+        <Tab.Screen
+          name="ReadyRecipeScreen"
+          component={ReadyRecipeScreen}
+          options={{
+            tabBarLabel: "Ready Recipe",
+            tabBarIcon: () => {},
+          }}
+        />
+        <Tab.Screen
+          name="PublicRecipesScreen"
+          component={PublicRecipesScreen}
+          options={{
+            tabBarLabel: "Public Recipes",
+            tabBarIcon: () => {},
+          }}
+        />
+        <Tab.Screen
+          name="Profile And Setting"
+          component={ProfileAndSetting}
+          options={{
+            tabBarLabel: "Profile And Setting",
+            tabBarIcon: () => {},
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   ) : (
     <NavigationContainer>

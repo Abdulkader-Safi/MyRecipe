@@ -4,8 +4,9 @@ import { Loading, ScreenWrapper } from "../../components";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { SET_LOGGED_IN } from "../../redux/slices/authSlices";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -21,13 +22,20 @@ const Register = () => {
     setIsLoading(true);
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
+      .then((userCredential) => {
+        const userRef = doc(collection(db, "users"), userCredential.user.uid);
+        setDoc(userRef, {
+          email: email,
+          fullName: fullName,
+        });
+
         setEmail("");
+        setFullName("");
         setPassword("");
 
         dispatch(SET_LOGGED_IN());
         setIsLoading(false);
-        navigation.navigate("Home");
+        navigation.navigate("HomeScreen");
       })
       .catch((err) => {
         setIsLoading(false);
