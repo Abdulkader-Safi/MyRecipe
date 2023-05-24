@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
-import { ScreenWrapper } from "./../../components";
+import { Loading, ScreenWrapper } from "./../../components";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../../redux/slices/authSlices";
@@ -37,6 +37,8 @@ const HomeScreen = () => {
 
   return (
     <ScreenWrapper>
+      {isLoading && <Loading />}
+
       <View className="h-screen flex justify-around items-center bg-bg-color">
         <Text>HomeScreen</Text>
       </View>

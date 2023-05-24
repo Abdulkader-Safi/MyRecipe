@@ -10,50 +10,70 @@ import {
   ReadyRecipeScreen,
   PublicRecipesScreen,
   ProfileAndSetting,
+  Profile,
 } from "../pages";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/slices/authSlices";
+import { Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navType = useSelector();
 
   return isLoggedIn ? (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="HomeScreen">
+      <Tab.Navigator
+        initialRouteName="HomeScreen"
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveBackgroundColor: "#FAB24B",
+          tabBarActiveTintColor: "#000000",
+          tabBarInactiveTintColor: "#675E5E",
+          tabBarShowLabel: false,
+        }}
+      >
         <Tab.Screen
           name="HomeScreen"
           component={HomeScreen}
           options={{
-            tabBarLabel: "Home",
-            tabBarIcon: () => {},
+            headerShown: false,
+            tabBarIcon: ({ focused }) => {
+              return <Image source={require("./../assets/icons/Home.png")} />;
+            },
           }}
         />
         <Tab.Screen
           name="ReadyRecipeScreen"
           component={ReadyRecipeScreen}
           options={{
-            tabBarLabel: "Ready Recipe",
-            tabBarIcon: () => {},
+            headerShown: false,
+            tabBarIcon: ({ focused }) => {
+              return <Image source={require("./../assets/icons/PublicChicken.png")} />;
+            },
           }}
         />
         <Tab.Screen
           name="PublicRecipesScreen"
           component={PublicRecipesScreen}
           options={{
-            tabBarLabel: "Public Recipes",
-            tabBarIcon: () => {},
+            headerShown: false,
+            tabBarIcon: ({ focused }) => {
+              return <Image source={require("./../assets/icons/Chicken.png")} />;
+            },
           }}
         />
         <Tab.Screen
           name="Profile And Setting"
           component={ProfileAndSetting}
           options={{
-            tabBarLabel: "Profile And Setting",
-            tabBarIcon: () => {},
+            headerShown: false,
+            tabBarIcon: ({ focused }) => {
+              return <Image source={require("./../assets/icons/Settings.png")} />;
+            },
           }}
         />
       </Tab.Navigator>
