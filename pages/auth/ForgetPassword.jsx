@@ -1,11 +1,14 @@
-import { View, Text, Image, TouchableOpacity, KeyboardAvoidingView, TextInput } from "react-native";
+import { View, Text, Image, TouchableOpacity, KeyboardAvoidingView, TextInput, Keyboard } from "react-native";
 import React, { useState } from "react";
 import { ScreenWrapper } from "../../components";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
 
-  const HandleForgetPassword = () => {};
+  const HandleForgetPassword = (e) => {
+    e.preventDefault();
+    Keyboard.dismiss() 
+  };
 
   return (
     <KeyboardAvoidingView className="flex-1 justify-center items-center" behavior="padding">

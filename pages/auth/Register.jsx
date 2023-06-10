@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, KeyboardAvoidingView, TextInput } from "react-native";
+import { View, Text, Image, TouchableOpacity, KeyboardAvoidingView, TextInput, Keyboard } from "react-native";
 import React, { useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
 import { useNavigation } from "@react-navigation/native";
@@ -19,6 +19,8 @@ const Register = () => {
 
   const HandRegistration = (e) => {
     e.preventDefault();
+    Keyboard.dismiss() 
+
     setIsLoading(true);
 
     createUserWithEmailAndPassword(auth, email, password)

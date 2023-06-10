@@ -22,11 +22,21 @@ const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const navType = useSelector();
 
   return isLoggedIn ? (
     <NavigationContainer>
       <Tab.Navigator
+        tabBarOptions={{
+          showLabel: false,
+          style: {
+            position: "absolute",
+            bottom: 25,
+            left: 20,
+            right: 20,
+            elevation: 0,
+            backgroundColor: "#FFFFFF"
+          },
+        }}
         initialRouteName="HomeScreen"
         screenOptions={{
           headerShown: false,
