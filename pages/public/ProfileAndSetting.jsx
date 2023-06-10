@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Keyboard } from "react-native";
 import React, { useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
 import { useDispatch } from "react-redux";
@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { REMOVE_ACTIVE_USER } from "../../redux/slices/authSlices";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
 
 const ProfileAndSetting = () => {
   const navigation = useNavigation();
@@ -13,8 +14,17 @@ const ProfileAndSetting = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleGotoProfile = () => {
-    navigation.navigate("Profile");
+  const handleGotoProfile = (e) => {
+    e.preventDefault();
+    Keyboard.dismiss();
+
+    setIsLoading(true);
+    dispatch(
+      SET_NAVIGATION_PAGE({
+        page: "HOME",
+      })
+    );
+    setIsLoading(false);
   };
 
   const handleLogout = () => {
@@ -25,7 +35,6 @@ const ProfileAndSetting = () => {
         dispatch(REMOVE_ACTIVE_USER());
 
         setIsLoading(false);
-        // navigation.navigate("Welcome");
       })
       .catch((error) => {
         setIsLoading(false);

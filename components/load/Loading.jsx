@@ -3,7 +3,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <View className="w-full h-full mx-auto fixed flex justify-center items-center bg-bg-color">
+    <View className="w-screen h-screen mx-auto fixed flex justify-center items-center bg-bg-color">
       <Image className="h-72 w-72" source={require("./../../assets/Loading/Loading.gif")} />
     </View>
   );

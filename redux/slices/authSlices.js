@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Define the initial state using that type
 const initialState = {
   isLoggedIn: false,
   email: null,
@@ -10,7 +9,6 @@ const initialState = {
 
 export const authSlice = createSlice({
   name: "auth",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     SET_LOGGED_IN: (state) => {

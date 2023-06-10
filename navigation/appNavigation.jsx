@@ -11,72 +11,101 @@ import {
   PublicRecipesScreen,
   ProfileAndSetting,
   Profile,
+  NewRecipe,
 } from "../pages";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../redux/slices/authSlices";
 import { Image } from "react-native";
+import { selectNavPage } from "../redux/slices/routeSlices";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const navPage = useSelector(selectNavPage);
 
   return isLoggedIn ? (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="HomeScreen"
-        screenOptions={{
-          headerShown: false,
-          tabBarActiveBackgroundColor: "#FAB24B",
-          tabBarActiveTintColor: "#000000",
-          tabBarInactiveTintColor: "#675E5E",
-          tabBarShowLabel: false,
-        }}
-      >
-        <Tab.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{
+    navPage === "PROFILE" ? (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Profile">
+          <Stack.Screen options={{ headerShown: false }} name="Profile" component={Profile} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    ) : navPage === "HOME" ? (
+      <NavigationContainer>
+        <Tab.Navigator
+          initialRouteName="HomeScreen"
+          screenOptions={{
             headerShown: false,
-            tabBarIcon: ({ focused }) => {
-              return <Image source={require("./../assets/icons/Home.png")} />;
-            },
+            tabBarActiveBackgroundColor: "#FAB24B",
+            tabBarActiveTintColor: "#000000",
+            tabBarInactiveTintColor: "#675E5E",
+            tabBarShowLabel: false,
           }}
-        />
-        <Tab.Screen
-          name="ReadyRecipeScreen"
-          component={ReadyRecipeScreen}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => {
-              return <Image source={require("./../assets/icons/PublicChicken.png")} />;
-            },
-          }}
-        />
-        <Tab.Screen
-          name="PublicRecipesScreen"
-          component={PublicRecipesScreen}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => {
-              return <Image source={require("./../assets/icons/Chicken.png")} />;
-            },
-          }}
-        />
-        <Tab.Screen
-          name="Profile And Setting"
-          component={ProfileAndSetting}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused }) => {
-              return <Image source={require("./../assets/icons/Settings.png")} />;
-            },
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+        >
+          <Tab.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => {
+                return <Image source={require("./../assets/icons/Home.png")} />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="ReadyRecipeScreen"
+            component={ReadyRecipeScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => {
+                return <Image source={require("./../assets/icons/PublicChicken.png")} />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="CreateNewRecipe"
+            component={NewRecipe}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => {
+                return <Image source={require("./../assets/icons/plus.png")} />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="PublicRecipesScreen"
+            component={PublicRecipesScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => {
+                return <Image source={require("./../assets/icons/Chicken.png")} />;
+              },
+            }}
+          />
+          <Tab.Screen
+            name="Profile And Setting"
+            component={ProfileAndSetting}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => {
+                return <Image source={require("./../assets/icons/Settings.png")} />;
+              },
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    ) : navPage === "NewRecipe" ? (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="NewRecipe">
+          <Stack.Screen options={{ headerShown: false }} name="NewRecipe" component={NewRecipe} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    ) : (
+      <></>
+    )
   ) : (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">

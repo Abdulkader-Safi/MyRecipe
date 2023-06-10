@@ -1,4 +1,12 @@
-import { View, Text, Image, TouchableOpacity, KeyboardAvoidingView, TextInput, Keyboard } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  TextInput,
+  Keyboard,
+} from "react-native";
 import React, { useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +15,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { SET_LOGGED_IN } from "../../redux/slices/authSlices";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -19,7 +28,7 @@ const Register = () => {
 
   const HandRegistration = (e) => {
     e.preventDefault();
-    Keyboard.dismiss() 
+    Keyboard.dismiss();
 
     setIsLoading(true);
 
@@ -36,6 +45,11 @@ const Register = () => {
         setPassword("");
 
         dispatch(SET_LOGGED_IN());
+        dispatch(
+          SET_NAVIGATION_PAGE({
+            page: "HOME",
+          })
+        );
         setIsLoading(false);
         // navigation.navigate("HomeScreen");
       })

@@ -11,6 +11,9 @@ import ForgetPassword from "./auth/ForgetPassword";
 import AuthEmailSent from "./auth/MessagesPage/AuthEmailSent";
 import Profile from "./auth/Profile";
 
+// Recipe
+import NewRecipe from "./recipe/NewRecipe";
+
 export {
   Welcome,
   HomeScreen,
@@ -22,4 +25,5 @@ export {
   ForgetPassword,
   AuthEmailSent,
   Profile,
+  NewRecipe,
 };
