@@ -25,7 +25,7 @@ const ProfileAndSetting = () => {
         dispatch(REMOVE_ACTIVE_USER());
 
         setIsLoading(false);
-        navigation.navigate("Welcome");
+        // navigation.navigate("Welcome");
       })
       .catch((error) => {
         setIsLoading(false);
