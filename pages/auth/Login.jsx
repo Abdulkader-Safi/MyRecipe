@@ -42,7 +42,6 @@ const Login = () => {
           })
         );
         setIsLoading(false);
-        // navigation.navigate("HomeScreen");
       })
       .catch((err) => {
         setIsLoading(false);

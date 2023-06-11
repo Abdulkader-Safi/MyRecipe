@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
-import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
@@ -18,7 +17,6 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
 
 const Register = () => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +49,6 @@ const Register = () => {
           })
         );
         setIsLoading(false);
-        // navigation.navigate("HomeScreen");
       })
       .catch((err) => {
         setIsLoading(false);
@@ -85,6 +82,7 @@ const Register = () => {
                 <TextInput
                   placeholder="Email"
                   onChangeText={setEmail}
+                  keyboardType="email-address"
                   value={email}
                   className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border"
                 />

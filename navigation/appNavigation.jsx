@@ -66,16 +66,6 @@ const AppNavigation = () => {
             }}
           />
           <Tab.Screen
-            name="CreateNewRecipe"
-            component={NewRecipe}
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ focused }) => {
-                return <Image source={require("./../assets/icons/plus.png")} />;
-              },
-            }}
-          />
-          <Tab.Screen
             name="PublicRecipesScreen"
             component={PublicRecipesScreen}
             options={{

@@ -1,25 +1,18 @@
-import { View, Text, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, Image, Keyboard, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Loading, ScreenWrapper } from "./../../components";
 import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const NewRecipe = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(
-  //     SET_NAVIGATION_PAGE({
-  //       page: "NewRecipe",
-  //     })
-  //   );
-  // }, []);
-
   const HandleGoBackHome = (e) => {
     e.preventDefault();
+    Keyboard.dismiss();
+
     setIsLoading(true);
     dispatch(
       SET_NAVIGATION_PAGE({
@@ -27,7 +20,6 @@ const NewRecipe = () => {
       })
     );
 
-    console.log("HandleGoBackHome");
     setIsLoading(false);
   };
 
@@ -36,9 +28,9 @@ const NewRecipe = () => {
       {isLoading && <Loading />}
 
       <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
-        <View className="bg-bg-while flex flex-row justify-between items-center p-3 rounded-2xl w-full mx-3">
+        <View className="bg-bg-gold flex flex-row justify-between items-center p-3 rounded-2xl w-full mx-3">
           <TouchableOpacity
-            className="bg-bg-while flex justify-center items-center p-2 rounded-2xl"
+            className="bg-bg-color flex justify-center items-center p-2 rounded-2xl"
             onPress={HandleGoBackHome}
           >
             <Image source={require("./../../assets/icons/double-left.png")} />

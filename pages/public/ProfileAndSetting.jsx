@@ -2,14 +2,12 @@ import { View, Text, TouchableOpacity, Keyboard } from "react-native";
 import React, { useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
 import { useDispatch } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
 import { REMOVE_ACTIVE_USER } from "../../redux/slices/authSlices";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
 
 const ProfileAndSetting = () => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +19,7 @@ const ProfileAndSetting = () => {
     setIsLoading(true);
     dispatch(
       SET_NAVIGATION_PAGE({
-        page: "HOME",
+        page: "PROFILE",
       })
     );
     setIsLoading(false);
