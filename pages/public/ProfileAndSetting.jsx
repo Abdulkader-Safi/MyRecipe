@@ -1,16 +1,17 @@
 import { View, Text, TouchableOpacity, Keyboard } from "react-native";
 import React, { useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
-import { useDispatch } from "react-redux";
-import { REMOVE_ACTIVE_USER } from "../../redux/slices/authSlices";
+import { useDispatch, useSelector } from "react-redux";
+import { REMOVE_ACTIVE_USER, selectUserName } from "../../redux/slices/authSlices";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
 
 const ProfileAndSetting = () => {
-  const dispatch = useDispatch();
-
   const [isLoading, setIsLoading] = useState(false);
+  const userName = useSelector(selectUserName);
+
+  const dispatch = useDispatch();
 
   const handleGotoProfile = (e) => {
     e.preventDefault();
@@ -42,31 +43,32 @@ const ProfileAndSetting = () => {
   };
 
   return (
-    <ScreenWrapper>
-      {isLoading && <Loading />}
+    <>
+      <ScreenWrapper>
+        <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
+          <View className="w-4/5 mb-14 h-4/5 justify-around">
+            <View className="">
+              <TouchableOpacity
+                onPress={handleGotoProfile}
+                className="bg-bg-while flex justify-center items-center p-3 rounded-2xl"
+              >
+                <Text>Profile</Text>
+              </TouchableOpacity>
+            </View>
 
-      <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
-        <View className="w-4/5 mb-14 h-4/5 justify-around">
-          <View className="">
-            <TouchableOpacity
-              onPress={handleGotoProfile}
-              className="bg-bg-while flex justify-center items-center p-3 rounded-2xl"
-            >
-              <Text>Profile</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View className="">
-            <TouchableOpacity
-              onPress={handleLogout}
-              className="bg-bg-gold flex justify-center items-center p-3 rounded-2xl"
-            >
-              <Text>logout</Text>
-            </TouchableOpacity>
+            <View className="">
+              <TouchableOpacity
+                onPress={handleLogout}
+                className="bg-bg-gold flex justify-center items-center p-3 rounded-2xl"
+              >
+                <Text>logout</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </ScreenWrapper>
+      </ScreenWrapper>
+      {isLoading ? <Loading /> : null}
+    </>
   );
 };
 

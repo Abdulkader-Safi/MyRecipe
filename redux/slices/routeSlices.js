@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  navPage: "PROFILE",
+  navPage: "HOME",
 };
 
 export const routeSlice = createSlice({

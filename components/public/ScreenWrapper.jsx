@@ -1,18 +1,13 @@
-import { View, StatusBar, Platform } from "react-native";
+import { Platform } from "react-native";
 import React from "react";
 
-const ScreenWrapper = ({ children }) => {
-  let statusBarHeight = StatusBar.currentHeight
-    ? StatusBar.currentHeight
-    : Platform.OS === "ios"
-    ? 30
-    : 0;
+const SafeArea = Platform.select({
+  ios: () => require("react-native").SafeAreaView,
+  android: () => require("react-native-safe-area-context").SafeAreaView,
+})();
 
-  return (
-    <View style={{ paddingTop: statusBarHeight }} className="h-screen w-screen">
-      {children}
-    </View>
-  );
+const ScreenWrapper = ({ children }) => {
+  return <SafeArea>{children}</SafeArea>;
 };
 
 export default ScreenWrapper;

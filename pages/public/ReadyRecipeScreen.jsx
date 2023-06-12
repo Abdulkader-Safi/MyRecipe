@@ -6,12 +6,14 @@ const ReadyRecipeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <ScreenWrapper>
-      {isLoading && <Loading />}
-      <View className="h-screen flex justify-around items-center bg-bg-color">
-        <Text>ReadyRecipeScreen</Text>
-      </View>
-    </ScreenWrapper>
+    <>
+      <ScreenWrapper>
+        <View className="h-screen flex justify-around items-center bg-bg-color">
+          <Text>ReadyRecipeScreen</Text>
+        </View>
+      </ScreenWrapper>
+      {isLoading ? <Loading /> : null}
+    </>
   );
 };
 

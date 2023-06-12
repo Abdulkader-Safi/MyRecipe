@@ -3,12 +3,12 @@ import "react-native-gesture-handler";
 import React from "react";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import Starter from "./Starter";
+import AppNavigation from "./navigation/appNavigation";
 
 const App = () => {
   return (
     <Provider store={store}>
-      <Starter />
+      <AppNavigation />
     </Provider>
   );
 };

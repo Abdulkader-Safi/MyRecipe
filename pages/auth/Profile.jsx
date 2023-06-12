@@ -22,19 +22,20 @@ const Profile = () => {
   };
 
   return (
-    <ScreenWrapper>
-      {isLoading && <Loading />}
-
-      <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
-        <Text>Profile</Text>
-        <TouchableOpacity
-          onPress={HandleGoingBackToHomePage}
-          className="bg-bg-gold flex justify-center items-center p-3 rounded-2xl"
-        >
-          <Text>Back Home</Text>
-        </TouchableOpacity>
-      </View>
-    </ScreenWrapper>
+    <>
+      <ScreenWrapper>
+        <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
+          <Text>Profile</Text>
+          <TouchableOpacity
+            onPress={HandleGoingBackToHomePage}
+            className="bg-bg-gold flex justify-center items-center p-3 rounded-2xl"
+          >
+            <Text>Back Home</Text>
+          </TouchableOpacity>
+        </View>
+      </ScreenWrapper>
+      {isLoading ? <Loading /> : null}
+    </>
   );
 };
 
