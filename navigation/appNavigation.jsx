@@ -93,6 +93,16 @@ const AppNavigation = () => {
           <Stack.Screen options={{ headerShown: false }} name="NewRecipe" component={NewRecipe} />
         </Stack.Navigator>
       </NavigationContainer>
+    ) : navPage === "SelectedRecipe" ? (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SelectedRecipe">
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="SelectedRecipe"
+            component={SelectedRecipe}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     ) : (
       <></>
     )

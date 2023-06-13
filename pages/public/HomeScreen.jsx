@@ -28,7 +28,6 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
-
     setIsLoading(true);
     onAuthStateChanged(auth, async (user) => {
       if (user) {

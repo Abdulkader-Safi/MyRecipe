@@ -8,7 +8,7 @@ const PublicRecipesScreen = () => {
   return (
     <>
       <ScreenWrapper>
-        <View className="h-screen flex justify-around items-center bg-bg-color">
+        <View className="h-screen w-screen flex justify-center items-center bg-bg-color">
           <Text>PublicRecipesScreen</Text>
         </View>
       </ScreenWrapper>

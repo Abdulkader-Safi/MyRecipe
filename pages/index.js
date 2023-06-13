@@ -13,6 +13,7 @@ import Profile from "./auth/Profile";
 
 // Recipe
 import NewRecipe from "./recipe/NewRecipe";
+import SelectedRecipe from "./recipe/SelectedRecipe";
 
 export {
   Welcome,
@@ -26,4 +27,5 @@ export {
   AuthEmailSent,
   Profile,
   NewRecipe,
+  SelectedRecipe,
 };
