@@ -71,10 +71,9 @@ const ReadyRecipeScreen = () => {
   return (
     <>
       {isLoading1 ? (
-        <>
+        <View className="h-screen bg-bg-color">
           <Loading />
-          <View className="h-screen flex justify-around items-center bg-bg-color"></View>
-        </>
+        </View>
       ) : (
         <ScreenWrapper>
           <View className="h-screen flex justify-around items-center bg-bg-color">
