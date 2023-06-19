@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Loading, ScreenWrapper } from "./../../components";
 import { useSelector } from "react-redux";
@@ -19,13 +19,9 @@ const HomeScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const Username = useSelector(selectUserName);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const dispatch = useDispatch();
-
-  const HandleGoingBackToHomePage = (e) => {
-    e.preventDefault();
-    alert(Username);
-  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -56,21 +52,35 @@ const HomeScreen = () => {
       }
     });
     setIsLoading(false);
-    console.log("running...");
   }, [isLoggedIn, Username]);
+
+  const HandelNewRecipe = (e) => {
+    e.preventDefault();
+    dispatch(
+      SET_NAVIGATION_PAGE({
+        page: "NewRecipe",
+      })
+    );
+  };
 
   return (
     <>
       <ScreenWrapper>
         <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
-          <View className="bg-bg-gold flex flex-row items-center p-3 rounded-2xl w-full mx-3">
-            <TouchableOpacity
-              className="bg-bg-color flex justify-center items-center p-2 rounded-2xl absolute left-5"
-            >
-              <Image source={require("./../../assets/icons/double-left.png")} />
-            </TouchableOpacity>
-            <View className="w-full flex justify-center">
-              <Text className="text-xl m-auto">{Username}</Text>
+          <View className="w-11/12 mb-14 justify-around absolute top-0.5">
+            <View className="flex flex-row w-12/12 justify-center items-center mt-2">
+              <TextInput
+                placeholder="Search..."
+                onChangeText={setSearchQuery}
+                value={searchQuery}
+                className="w-11/12 p-3 rounded-2xl border-2 border-input-border bg-wlc-color"
+              />
+              <TouchableOpacity
+                className="flex justify-center items-center p-3.5 rounded-2xl border-2 border-input-border bg-wlc-color"
+                onPress={HandelNewRecipe}
+              >
+                <Image source={require("./../../assets/icons/add.png")} />
+              </TouchableOpacity>
             </View>
           </View>
         </View>

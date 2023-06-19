@@ -50,7 +50,6 @@ const Login = () => {
   };
 
   const HandleForgetPassword = () => {
-    alert("tell");
     navigation.navigate("ForgetPassword");
   };
 

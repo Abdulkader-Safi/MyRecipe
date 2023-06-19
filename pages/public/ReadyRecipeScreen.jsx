@@ -72,11 +72,11 @@ const ReadyRecipeScreen = () => {
 
   const handel = (mealID) => {
     setIsLoading(true);
-    dispatch(
-      SET_MEAL_ID({
-        MealID: mealID,
-      })
-    );
+    // dispatch(
+    //   SET_MEAL_ID({
+    //     MealID: mealID,
+    //   })
+    // );
 
     dispatch(
       SET_NAVIGATION_PAGE({
@@ -118,6 +118,7 @@ const ReadyRecipeScreen = () => {
                       <View className="m-1" key={meal.idMeal}>
                         <TouchableWithoutFeedback
                           key={meal.idMeal}
+                          className="mt-4"
                           onPress={() => handel(meal.idMeal)}
                         >
                           <Card key={meal.idMeal}>
