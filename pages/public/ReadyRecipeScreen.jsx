@@ -1,7 +1,17 @@
-import { View, Text, ScrollView, TextInput, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React, { useEffect, useRef, useState } from "react";
-import { CategoriesCart, FoodCart, Loading, ScreenWrapper } from "../../components";
+import { Loading, ScreenWrapper } from "../../components";
 import { Card, Paragraph } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import { SET_MEAL_ID } from "../../redux/slices/searchMealSlices";
+import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
 
 const ReadyRecipeScreen = () => {
   const scrollRef = useRef();
@@ -12,6 +22,7 @@ const ReadyRecipeScreen = () => {
   const [meals, setMeals] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
 
   // Public Meals API
 
@@ -31,10 +42,6 @@ const ReadyRecipeScreen = () => {
     setIsLoading1(true);
     getMeals();
   }, []);
-
-  const onChangeSearch = (query) => {
-    setSearchQuery(query);
-  };
 
   const handelRequestedType = async (category) => {
     setMainPage(false);
@@ -63,9 +70,20 @@ const ReadyRecipeScreen = () => {
     });
   };
 
-  const handel = (mealName) => {
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=Steak%20Diane${mealName}`;
-    alert(mealName);
+  const handel = (mealID) => {
+    setIsLoading(true);
+    dispatch(
+      SET_MEAL_ID({
+        MealID: mealID,
+      })
+    );
+
+    dispatch(
+      SET_NAVIGATION_PAGE({
+        page: "SelectedRecipe",
+      })
+    );
+    setIsLoading(false);
   };
 
   return (
@@ -88,7 +106,7 @@ const ReadyRecipeScreen = () => {
 
                 <TextInput
                   placeholder="Search..."
-                  onChangeText={onChangeSearch}
+                  onChangeText={setSearchQuery}
                   value={searchQuery}
                   className="w-11/12 p-3 rounded-2xl border-2 border-input-border bg-wlc-color"
                 />
@@ -97,34 +115,37 @@ const ReadyRecipeScreen = () => {
               <ScrollView className="" ref={scrollRef}>
                 {displaySelectedCategory
                   ? selectedCategory.map((meal) => (
-                      <TouchableOpacity
-                        key={meal.idMeal}
-                        className="mt-4"
-                        onPress={() => handel(meal.strMeal)}
-                      >
-                        <Card key={meal.idMeal}>
-                          <Card.Cover source={{ uri: meal.strMealThumb }} />
-                          <Card.Title title={meal.strMeal} />
-                          <Card.Content>
-                            <Paragraph>{meal.idMeal}</Paragraph>
-                          </Card.Content>
-                        </Card>
-                      </TouchableOpacity>
+                      <View className="m-1" key={meal.idMeal}>
+                        <TouchableWithoutFeedback
+                          key={meal.idMeal}
+                          onPress={() => handel(meal.idMeal)}
+                        >
+                          <Card key={meal.idMeal}>
+                            <Card.Cover source={{ uri: meal.strMealThumb }} />
+                            <Card.Title title={meal.strMeal} />
+                            <Card.Content>
+                              <Paragraph>{meal.idMeal}</Paragraph>
+                            </Card.Content>
+                          </Card>
+                        </TouchableWithoutFeedback>
+                      </View>
                     ))
                   : meals.map((meal) => (
-                      <TouchableOpacity
-                        key={meal.idCategory}
-                        className="mt-4"
-                        onPress={() => handelRequestedType(meal.strCategory)}
-                      >
-                        <Card key={meal.idCategory}>
-                          <Card.Cover source={{ uri: meal.strCategoryThumb }} />
-                          <Card.Title title={meal.strCategory} />
-                          <Card.Content>
-                            <Paragraph>{meal.strCategoryDescription}</Paragraph>
-                          </Card.Content>
-                        </Card>
-                      </TouchableOpacity>
+                      <View className="m-1" key={meal.idCategory}>
+                        <TouchableWithoutFeedback
+                          key={meal.idCategory}
+                          className="mt-4"
+                          onPress={() => handelRequestedType(meal.strCategory)}
+                        >
+                          <Card key={meal.idCategory}>
+                            <Card.Cover source={{ uri: meal.strCategoryThumb }} />
+                            <Card.Title title={meal.strCategory} />
+                            <Card.Content>
+                              <Paragraph>{meal.strCategoryDescription}</Paragraph>
+                            </Card.Content>
+                          </Card>
+                        </TouchableWithoutFeedback>
+                      </View>
                     ))}
               </ScrollView>
             </View>

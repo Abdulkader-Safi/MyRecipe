@@ -34,13 +34,16 @@ const Register = () => {
       .then((userCredential) => {
         const userRef = doc(collection(db, "users"), userCredential.user.uid);
         setDoc(userRef, {
+          uid: userCredential.user.uid,
           email: email,
           fullName: fullName,
+          recipes: [],
         });
 
         setEmail("");
         setFullName("");
         setPassword("");
+        alert("User " + fullName + " has been registered successfully.");
 
         dispatch(SET_LOGGED_IN());
         dispatch(

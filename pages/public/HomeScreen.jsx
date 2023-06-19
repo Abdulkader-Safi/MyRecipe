@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Loading, ScreenWrapper } from "./../../components";
 import { useSelector } from "react-redux";
@@ -55,6 +55,7 @@ const HomeScreen = () => {
         setIsLoading(false);
       }
     });
+    setIsLoading(false);
     console.log("running...");
   }, [isLoggedIn, Username]);
 
@@ -62,14 +63,15 @@ const HomeScreen = () => {
     <>
       <ScreenWrapper>
         <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
-          <View className="items-center">
-            <Text>HomeScreen</Text>
+          <View className="bg-bg-gold flex flex-row items-center p-3 rounded-2xl w-full mx-3">
             <TouchableOpacity
-              onPress={HandleGoingBackToHomePage}
-              className="bg-bg-gold flex justify-center items-center p-3 rounded-2xl"
+              className="bg-bg-color flex justify-center items-center p-2 rounded-2xl absolute left-5"
             >
-              <Text>Back Home</Text>
+              <Image source={require("./../../assets/icons/double-left.png")} />
             </TouchableOpacity>
+            <View className="w-full flex justify-center">
+              <Text className="text-xl m-auto">{Username}</Text>
+            </View>
           </View>
         </View>
       </ScreenWrapper>
