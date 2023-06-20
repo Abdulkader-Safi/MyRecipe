@@ -9,6 +9,8 @@ import { TouchableWithoutFeedback } from "react-native";
 import { TextInput } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
 import { selectUserID, selectUserName } from "../../redux/slices/authSlices";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const NewRecipe = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -110,22 +112,74 @@ const NewRecipe = () => {
     alert("Test");
   };
 
-  const HandelCreateNewRecipe = () => {
-    // const userRef = doc(collection(db, "Recipe"));
-    // setDoc(userRef, {
-    //   uid: userCredential.user.uid,
-    //   email: email,
-    //   fullName: fullName,
-    //   recipes: [],
-    // });
+  const HandelCreateNewRecipe = async (e) => {
+    e.preventDefault();
+    setIsLoading(false);
 
-    setIsLoading(true);
-    dispatch(
-      SET_NAVIGATION_PAGE({
-        page: "HOME",
-      })
-    );
+    if (Ingredients01 === "" || Measure01 === "") {
+      alert("Insert at least one Recipe");
+      setIsLoading(false);
+      return;
+    }
 
+    const recipeRef = await addDoc(collection(db, "Recipe"), {
+      uid: UserID,
+      userName: UserName,
+      photoPath: photoPath,
+      recipeName: recipeName,
+      ingredients01: Ingredients01,
+      ingredients02: Ingredients02,
+      ingredients03: Ingredients03,
+      ingredients04: Ingredients04,
+      ingredients05: Ingredients05,
+      ingredients06: Ingredients06,
+      ingredients07: Ingredients07,
+      ingredients08: Ingredients08,
+      ingredients09: Ingredients09,
+      ingredients10: Ingredients10,
+      ingredients11: Ingredients11,
+      ingredients12: Ingredients12,
+      ingredients13: Ingredients13,
+      ingredients14: Ingredients14,
+      ingredients15: Ingredients15,
+      ingredients16: Ingredients16,
+      ingredients17: Ingredients17,
+      ingredients18: Ingredients18,
+      ingredients19: Ingredients19,
+      ingredients20: Ingredients20,
+      measure01: Measure01,
+      measure02: Measure02,
+      measure03: Measure03,
+      measure04: Measure04,
+      measure05: Measure05,
+      measure06: Measure06,
+      measure07: Measure07,
+      measure08: Measure08,
+      measure09: Measure09,
+      measure10: Measure10,
+      measure11: Measure11,
+      measure12: Measure12,
+      measure13: Measure13,
+      measure14: Measure14,
+      measure15: Measure15,
+      measure16: Measure16,
+      measure17: Measure17,
+      measure18: Measure18,
+      measure19: Measure19,
+      measure20: Measure20,
+      preparations: preparations,
+      isPublic: isPublic,
+    });
+
+    alert(recipeRef.id);
+
+    // dispatch(
+    //   SET_NAVIGATION_PAGE({
+    //     page: "HOME",
+    //   })
+    // );
+
+    clearInput(e);
     setIsLoading(false);
   };
 
