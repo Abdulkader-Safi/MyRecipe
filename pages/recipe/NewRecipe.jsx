@@ -1,4 +1,4 @@
-import { View, Text, Image, Keyboard, TouchableOpacity } from "react-native";
+import { View, Text, Image, Keyboard, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading, ScreenWrapper } from "./../../components";
@@ -10,10 +10,13 @@ import { TextInput } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
 import { selectUserID, selectUserName } from "../../redux/slices/authSlices";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../firebase";
+import * as ImagePicker from "expo-image-picker";
+import { db, storage } from "../../firebase";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const NewRecipe = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [image, setImage] = useState(null);
   const scrollRef = useRef();
   const dispatch = useDispatch();
   const UserID = useSelector(selectUserID);
@@ -108,13 +111,9 @@ const NewRecipe = () => {
     setIsLoading(false);
   };
 
-  const HandelAddPhoto = () => {
-    alert("Test");
-  };
-
   const HandelCreateNewRecipe = async (e) => {
     e.preventDefault();
-    setIsLoading(false);
+    setIsLoading(true);
 
     if (Ingredients01 === "" || Measure01 === "") {
       alert("Insert at least one Recipe");
@@ -171,7 +170,7 @@ const NewRecipe = () => {
       isPublic: isPublic,
     });
 
-    alert(recipeRef.id);
+    // alert(recipeRef.id);
 
     // dispatch(
     //   SET_NAVIGATION_PAGE({
@@ -188,6 +187,7 @@ const NewRecipe = () => {
     setIsLoading(true);
 
     Keyboard.dismiss();
+    setImage(null);
     setPhotoPath("");
     SetRecipeName("");
     SetIngredients01("");
@@ -236,6 +236,99 @@ const NewRecipe = () => {
     setIsLoading(false);
   };
 
+  const HandelPickImage = async () => {
+    setIsLoading(true);
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      const uploadURL = await uploadImageAsync(result.assets[0].uri);
+      setImage(uploadURL);
+      setInterval(() => {
+        setIsLoading(false);
+      }, 2000);
+      setPhotoPath(uploadURL);
+    } else {
+      setImage(null);
+      setInterval(() => {
+        setIsLoading(false);
+      }, 2000);
+    }
+  };
+
+  const HandelChangePhoto = () => {
+    return Alert.alert(
+      "Change Image?",
+      "Are you sure you want to Change selected Image? (if you press yes old image will be deleted)",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            deleteImage();
+            HandelPickImage();
+          },
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
+    HandelPickImage();
+  };
+
+  const uploadImageAsync = async (uri) => {
+    setIsLoading(true);
+    // Why are we using XMLHttpRequest? See:
+    // https://github.com/expo/expo/issues/2402#issuecomment-443726662
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function (e) {
+        console.log(e);
+        reject(new TypeError("Network request failed"));
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", uri, true);
+      xhr.send(null);
+    });
+
+    try {
+      const storageRef = ref(storage, `Images/Recipes/${Date.now()}`);
+      const result = await uploadBytes(storageRef, blob);
+      blob.close();
+      return await getDownloadURL(storageRef);
+    } catch (error) {
+      alert(`Error: ${error}`);
+    }
+
+    setIsLoading(false);
+  };
+
+  const deleteImage = async () => {
+    setIsLoading(true);
+    const deleteRef = ref(storage, image);
+    try {
+      deleteObject(deleteRef).then(() => {
+        setImage(null);
+        setInterval(() => {
+          setIsLoading(false);
+        }, 2000);
+      });
+    } catch (error) {
+      alert(`Error: ${error}`);
+    }
+  };
+
   return (
     <>
       <KeyboardAvoidingView className="flex-1 justify-center items-center" behavior="padding">
@@ -255,12 +348,19 @@ const NewRecipe = () => {
 
             <ScrollView className="bg-bg-while w-11/12 mt-20 mb-2 rounded-3xl" ref={scrollRef}>
               <View className="w-full flex justify-center items-center">
-                <TouchableWithoutFeedback onPress={HandelAddPhoto}>
-                  <Image
-                    source={photoPath ? photoPath : require("../../assets/images/add-photo.png")}
-                    className="h-60 w-60"
-                  />
-                </TouchableWithoutFeedback>
+                {image ? (
+                  // <TouchableWithoutFeedback onPress={HandelAddPhoto}>
+                  <TouchableWithoutFeedback onPress={HandelChangePhoto}>
+                    <Image source={{ uri: image }} className="h-60 w-60" />
+                  </TouchableWithoutFeedback>
+                ) : (
+                  <TouchableWithoutFeedback onPress={HandelPickImage}>
+                    <Image
+                      source={require("../../assets/images/add-photo.png")}
+                      className="h-60 w-60"
+                    />
+                  </TouchableWithoutFeedback>
+                )}
               </View>
 
               <View className="w-full flex justify-center items-center my-5">
