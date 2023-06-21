@@ -1,18 +1,29 @@
-import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
-import React, { useEffect, useState } from "react";
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  TouchableWithoutFeedback,
+  ScrollView,
+  Keyboard,
+  Text,
+} from "react-native";
+import React, { useEffect, useRef, useState } from "react";
 import { Loading, ScreenWrapper } from "./../../components";
 import { useSelector } from "react-redux";
 import {
   REMOVE_ACTIVE_USER,
   SET_ACTIVE_USER,
   selectIsLoggedIn,
+  selectUserID,
   selectUserName,
 } from "../../redux/slices/authSlices";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
+import { Card, Paragraph } from "react-native-paper";
 
 const HomeScreen = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -20,6 +31,9 @@ const HomeScreen = () => {
   const [displayName, setDisplayName] = useState("");
   const Username = useSelector(selectUserName);
   const [searchQuery, setSearchQuery] = useState("");
+  const [recipes, setRecipes] = useState([]);
+  const scrollRef = useRef();
+  const userID = useSelector(selectUserID);
 
   const dispatch = useDispatch();
 
@@ -44,15 +58,31 @@ const HomeScreen = () => {
             page: "HOME",
           })
         );
-        setIsLoading(false);
-      } else {
-        setDisplayName("");
-        dispatch(REMOVE_ACTIVE_USER());
+
+        getRecipes(user.uid);
+
         setIsLoading(false);
       }
     });
+
+    // scrollRef.current?.scrollTo({
+    //   y: 0,
+    // });
+
     setIsLoading(false);
   }, [isLoggedIn, Username]);
+
+  const getRecipes = async (id) => {
+    setIsLoading(true);
+    const RecipesRef = collection(db, "Recipe");
+    const q = query(RecipesRef, where("uid", "==", id));
+    const querySnapshot = await getDocs(q);
+    setRecipes([]);
+    querySnapshot.forEach((doc) => {
+      setRecipes((recipes) => [...recipes, doc.data()]);
+    });
+    setIsLoading(false);
+  };
 
   const HandelNewRecipe = (e) => {
     e.preventDefault();
@@ -61,6 +91,15 @@ const HomeScreen = () => {
         page: "NewRecipe",
       })
     );
+  };
+
+  const HandelGoTopPage = () => {
+    setIsLoading(true);
+    scrollRef.current?.scrollTo({
+      y: 0,
+    });
+    Keyboard.dismiss();
+    setIsLoading(false);
   };
 
   return (
@@ -83,8 +122,47 @@ const HomeScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
+          <View className="w-full items-center">
+            <ScrollView className="w-11/12 mt-20 mb-8 rounded-3xl" ref={scrollRef}>
+              {recipes ? (
+                recipes.map((meal, index) => (
+                  <>
+                    <View className="m-1" key={meal.idCategory}>
+                      <TouchableWithoutFeedback className="mt-4" onPress={() => {}} key={index}>
+                        <Card>
+                          <Card.Cover source={{ uri: meal.photoPath }} />
+                          <Card.Title
+                            className=" flex justify-center items-center"
+                            title={meal.recipeName}
+                          />
+                        </Card>
+                      </TouchableWithoutFeedback>
+                    </View>
+                  </>
+                ))
+              ) : (
+                <>
+                  <View className="w-full h-full flex justify-center items-center">
+                    <TouchableWithoutFeedback className="mt-4 " onPress={() => getRecipes(userID)}>
+                      <View className="flex justify-center items-center">
+                        <Text className="text-4xl text-wlc-color">No Recipes Found</Text>
+                        <Text className="text-lg text-bg-gold">Click to refresh</Text>
+                      </View>
+                    </TouchableWithoutFeedback>
+                  </View>
+                </>
+              )}
+            </ScrollView>
+          </View>
         </View>
       </ScreenWrapper>
+      <TouchableOpacity
+        className="bg-bg-gold flex justify-center items-center p-2 rounded-2xl absolute bottom-5 right-5 z-10"
+        onPress={HandelGoTopPage}
+      >
+        <Image source={require("./../../assets/icons/double-up.png")} />
+      </TouchableOpacity>
+
       {isLoading ? <Loading /> : null}
     </>
   );

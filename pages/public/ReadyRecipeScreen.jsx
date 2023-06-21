@@ -10,7 +10,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
 import { Card, Paragraph } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { SET_MEAL_ID } from "../../redux/slices/searchMealSlices";
 import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
 
 const ReadyRecipeScreen = () => {
@@ -124,9 +123,6 @@ const ReadyRecipeScreen = () => {
                           <Card key={meal.idMeal}>
                             <Card.Cover source={{ uri: meal.strMealThumb }} />
                             <Card.Title title={meal.strMeal} />
-                            <Card.Content>
-                              <Paragraph>{meal.idMeal}</Paragraph>
-                            </Card.Content>
                           </Card>
                         </TouchableWithoutFeedback>
                       </View>
