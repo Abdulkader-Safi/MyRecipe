@@ -76,6 +76,7 @@ const Register = () => {
                     placeholder="Full Name"
                     onChangeText={setFullName}
                     value={fullName}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border"
                   />
                 </View>
@@ -86,6 +87,7 @@ const Register = () => {
                     onChangeText={setEmail}
                     keyboardType="email-address"
                     value={email}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border"
                   />
                 </View>
@@ -96,6 +98,7 @@ const Register = () => {
                     onChangeText={setPassword}
                     secureTextEntry
                     value={password}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border"
                   />
                 </View>

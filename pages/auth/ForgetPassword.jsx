@@ -1,4 +1,12 @@
-import { View, Text, Image, TouchableOpacity, KeyboardAvoidingView, TextInput, Keyboard } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  TextInput,
+  Keyboard,
+} from "react-native";
 import React, { useState } from "react";
 import { ScreenWrapper } from "../../components";
 
@@ -7,7 +15,7 @@ const ForgetPassword = () => {
 
   const HandleForgetPassword = (e) => {
     e.preventDefault();
-    Keyboard.dismiss() 
+    Keyboard.dismiss();
   };
 
   return (
@@ -26,6 +34,7 @@ const ForgetPassword = () => {
                   placeholder="Email"
                   onChangeText={setEmail}
                   value={email}
+                  autoCapitalize="none"
                   className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border"
                 />
               </View>

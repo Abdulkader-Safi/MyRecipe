@@ -70,6 +70,7 @@ const Login = () => {
                     placeholder="Email"
                     onChangeText={setEmail}
                     value={email}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border"
                   />
                 </View>
@@ -80,6 +81,7 @@ const Login = () => {
                     onChangeText={setPassword}
                     secureTextEntry
                     value={password}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border"
                   />
                 </View>

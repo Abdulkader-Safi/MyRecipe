@@ -368,6 +368,7 @@ const NewRecipe = () => {
                   placeholder="Recipe Name"
                   onChangeText={SetRecipeName}
                   value={recipeName}
+                  autoCapitalize="none"
                   className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-11/12"
                 />
               </View>
@@ -385,12 +386,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 1"
                     onChangeText={SetIngredients01}
                     value={Ingredients01}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure01}
                     value={Measure01}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -401,12 +404,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 2"
                     onChangeText={SetIngredients02}
                     value={Ingredients02}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure02}
                     value={Measure02}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -417,12 +422,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 3"
                     onChangeText={SetIngredients03}
                     value={Ingredients03}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure03}
                     value={Measure03}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -433,12 +440,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 4"
                     onChangeText={SetIngredients04}
                     value={Ingredients04}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure04}
                     value={Measure04}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -449,12 +458,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 5"
                     onChangeText={SetIngredients05}
                     value={Ingredients05}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure05}
                     value={Measure05}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -465,12 +476,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 6"
                     onChangeText={SetIngredients06}
                     value={Ingredients06}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure06}
                     value={Measure06}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -481,12 +494,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 7"
                     onChangeText={SetIngredients07}
                     value={Ingredients07}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure07}
                     value={Measure07}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -497,12 +512,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 8"
                     onChangeText={SetIngredients08}
                     value={Ingredients08}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure08}
                     value={Measure08}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -513,12 +530,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 9"
                     onChangeText={SetIngredients09}
                     value={Ingredients09}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure09}
                     value={Measure09}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -529,12 +548,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 10"
                     onChangeText={SetIngredients10}
                     value={Ingredients10}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure10}
                     value={Measure10}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -545,12 +566,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 11"
                     onChangeText={SetIngredients11}
                     value={Ingredients11}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure11}
                     value={Measure11}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -561,12 +584,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 12"
                     onChangeText={SetIngredients12}
                     value={Ingredients12}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure12}
                     value={Measure12}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -577,12 +602,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 13"
                     onChangeText={SetIngredients13}
                     value={Ingredients13}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure13}
                     value={Measure13}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -593,12 +620,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 14"
                     onChangeText={SetIngredients14}
                     value={Ingredients14}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure14}
                     value={Measure14}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -609,12 +638,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 15"
                     onChangeText={SetIngredients15}
                     value={Ingredients15}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure15}
                     value={Measure15}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -625,12 +656,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 16"
                     onChangeText={SetIngredients16}
                     value={Ingredients16}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure16}
                     value={Measure16}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -641,12 +674,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 17"
                     onChangeText={SetIngredients17}
                     value={Ingredients17}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure17}
                     value={Measure17}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -657,12 +692,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 18"
                     onChangeText={SetIngredients18}
                     value={Ingredients18}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure18}
                     value={Measure18}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -673,12 +710,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 19"
                     onChangeText={SetIngredients19}
                     value={Ingredients19}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure19}
                     value={Measure19}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -689,12 +728,14 @@ const NewRecipe = () => {
                     placeholder="Ingredient 20"
                     onChangeText={SetIngredients20}
                     value={Ingredients20}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-8/12"
                   />
                   <TextInput
                     placeholder="Measure"
                     onChangeText={SetMeasure20}
                     value={Measure20}
+                    autoCapitalize="none"
                     className=" flex justify-center items-center p-3 rounded-2xl border-2 border-input-border w-4/12"
                   />
                 </View>
@@ -711,6 +752,7 @@ const NewRecipe = () => {
                   className="p-3 rounded-2xl border-2 border-input-border w-11/12"
                   placeholder="Enter text here"
                   multiline={true}
+                  autoCapitalize="none"
                   numberOfLines={6}
                   onChangeText={setPreparations}
                   value={preparations}

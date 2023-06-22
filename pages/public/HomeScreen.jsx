@@ -112,6 +112,7 @@ const HomeScreen = () => {
                 placeholder="Search..."
                 onChangeText={setSearchQuery}
                 value={searchQuery}
+                autoCapitalize="none"
                 className="w-11/12 p-3 rounded-2xl border-2 border-input-border bg-wlc-color"
               />
               <TouchableOpacity
@@ -126,31 +127,27 @@ const HomeScreen = () => {
             <ScrollView className="w-full mt-16 mb-12 rounded-3xl" ref={scrollRef}>
               {recipes ? (
                 recipes.map((meal, index) => (
-                  <>
-                    <View className="m-1" key={index}>
-                      <TouchableWithoutFeedback className="mt-4" onPress={() => {}}>
-                        <Card className="mx-3">
-                          <Card.Cover source={{ uri: meal.photoPath }} />
-                          <Card.Title
-                            className=" flex justify-center items-center"
-                            title={meal.recipeName}
-                          />
-                        </Card>
-                      </TouchableWithoutFeedback>
-                    </View>
-                  </>
-                ))
-              ) : (
-                <>
-                  <View className="w-full h-full flex justify-center items-center">
-                    <TouchableWithoutFeedback className="mt-4 " onPress={() => getRecipes(userID)}>
-                      <View className="flex justify-center items-center">
-                        <Text className="text-4xl text-wlc-color">No Recipes Found</Text>
-                        <Text className="text-lg text-bg-gold">Click to refresh</Text>
-                      </View>
+                  <View className="m-1" key={index}>
+                    <TouchableWithoutFeedback className="mt-4" onPress={() => {}}>
+                      <Card className="mx-3">
+                        <Card.Cover source={{ uri: meal.photoPath }} />
+                        <Card.Title
+                          className=" flex justify-center items-center"
+                          title={meal.recipeName}
+                        />
+                      </Card>
                     </TouchableWithoutFeedback>
                   </View>
-                </>
+                ))
+              ) : (
+                <View className="w-full h-full flex justify-center items-center">
+                  <TouchableWithoutFeedback className="mt-4 " onPress={() => getRecipes(userID)}>
+                    <View className="flex justify-center items-center">
+                      <Text className="text-4xl text-wlc-color">No Recipes Found</Text>
+                      <Text className="text-lg text-bg-gold">Click to refresh</Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </View>
               )}
             </ScrollView>
           </View>

@@ -108,6 +108,7 @@ const ReadyRecipeScreen = () => {
                   placeholder="Search..."
                   onChangeText={setSearchQuery}
                   value={searchQuery}
+                  autoCapitalize="none"
                   className="w-11/12 p-3 rounded-2xl border-2 border-input-border bg-wlc-color"
                 />
               </View>
@@ -117,11 +118,11 @@ const ReadyRecipeScreen = () => {
               <ScrollView className="w-full mt-16 mb-12 rounded-3xl" ref={scrollRef}>
                 {displaySelectedCategory
                   ? selectedCategory
-                      // .filter((meal) => {
-                      //   return searchQuery.toLowerCase() === ""
-                      //     ? meal
-                      //     : meal.strMeal.toLowerCase().includes(searchQuery);
-                      // })
+                      .filter((meal) => {
+                        return searchQuery.toLowerCase() === ""
+                          ? meal
+                          : meal.strMeal.toLowerCase().includes(searchQuery);
+                      })
                       .map((meal, index) => (
                         <View className="m-1" key={index}>
                           <TouchableWithoutFeedback
@@ -136,11 +137,11 @@ const ReadyRecipeScreen = () => {
                         </View>
                       ))
                   : meals
-                      // .filter((meal) => {
-                      //   return searchQuery.toLowerCase() === ""
-                      //     ? meal
-                      //     : meal.strCategory.toLowerCase().includes(searchQuery);
-                      // })
+                      .filter((meal) => {
+                        return searchQuery.toLowerCase() === ""
+                          ? meal
+                          : meal.strCategory.toLowerCase().includes(searchQuery);
+                      })
                       .map((meal, index) => (
                         <View className="m-1" key={index}>
                           <TouchableWithoutFeedback
