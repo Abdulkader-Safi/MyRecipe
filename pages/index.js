@@ -3,13 +3,13 @@ import HomeScreen from "./public/HomeScreen";
 import ReadyRecipeScreen from "./public/ReadyRecipeScreen";
 import PublicRecipesScreen from "./public/PublicRecipesScreen";
 import ProfileAndSetting from "./public/ProfileAndSetting";
+import About from "./public/About";
 
 // auth
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import ForgetPassword from "./auth/ForgetPassword";
 import AuthEmailSent from "./auth/MessagesPage/AuthEmailSent";
-import Profile from "./auth/Profile";
 
 // Recipe
 import NewRecipe from "./recipe/NewRecipe";
@@ -25,7 +25,7 @@ export {
   Register,
   ForgetPassword,
   AuthEmailSent,
-  Profile,
+  About,
   NewRecipe,
   SelectedRecipe,
 };

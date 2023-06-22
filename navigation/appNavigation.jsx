@@ -10,9 +10,9 @@ import {
   ReadyRecipeScreen,
   PublicRecipesScreen,
   ProfileAndSetting,
-  Profile,
   NewRecipe,
   SelectedRecipe,
+  About,
 } from "../pages";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -28,10 +28,14 @@ const AppNavigation = () => {
   const navPage = useSelector(selectNavPage);
 
   return isLoggedIn ? (
-    navPage === "PROFILE" ? (
+    navPage === "About" ? (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Profile">
-          <Stack.Screen options={{ headerShown: false }} name="Profile" component={Profile} />
+        <Stack.Navigator initialRouteName="About">
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="About"
+            component={About}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     ) : navPage === "HOME" ? (

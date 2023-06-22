@@ -33,7 +33,7 @@ export const authSlice = createSlice({
 export const { SET_LOGGED_IN, SET_ACTIVE_USER, REMOVE_ACTIVE_USER } = authSlice.actions;
 
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
-export const selectEmail = (state) => state.auth.email;
+export const selectUserEmail = (state) => state.auth.email;
 export const selectUserName = (state) => state.auth.userName;
 export const selectUserID = (state) => state.auth.userID;
 
