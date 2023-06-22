@@ -12,7 +12,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Loading, ScreenWrapper } from "./../../components";
 import { useSelector } from "react-redux";
 import {
-  REMOVE_ACTIVE_USER,
   SET_ACTIVE_USER,
   selectIsLoggedIn,
   selectUserID,
@@ -23,7 +22,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
-import { Card, Paragraph } from "react-native-paper";
+import { Card } from "react-native-paper";
 
 const HomeScreen = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -105,7 +104,7 @@ const HomeScreen = () => {
   return (
     <>
       <ScreenWrapper>
-        <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
+        <View className="h-screen w-screen flex items-center bg-bg-color">
           <View className="w-11/12 mb-14 justify-around absolute top-0.5 z-10">
             <View className="flex flex-row w-12/12 justify-center items-center mt-2">
               <TextInput
@@ -125,22 +124,28 @@ const HomeScreen = () => {
           </View>
           <View className="w-full items-center">
             <ScrollView className="w-full mt-16 mb-12 rounded-3xl" ref={scrollRef}>
-              {recipes ? (
-                recipes.map((meal, index) => (
-                  <View className="m-1" key={index}>
-                    <TouchableWithoutFeedback className="mt-4" onPress={() => {}}>
-                      <Card className="mx-3">
-                        <Card.Cover source={{ uri: meal.photoPath }} />
-                        <Card.Title
-                          className=" flex justify-center items-center"
-                          title={meal.recipeName}
-                        />
-                      </Card>
-                    </TouchableWithoutFeedback>
-                  </View>
-                ))
+              {recipes.length !== 0 ? (
+                recipes
+                  .filter((meal) => {
+                    return searchQuery.toLowerCase() === ""
+                      ? meal
+                      : meal.recipeName.toLowerCase().includes(searchQuery);
+                  })
+                  .map((meal, index) => (
+                    <View className="m-1" key={index}>
+                      <TouchableWithoutFeedback className="mt-4" onPress={() => {}}>
+                        <Card className="mx-3">
+                          <Card.Cover source={{ uri: meal.photoPath }} />
+                          <Card.Title
+                            className=" flex justify-center items-center"
+                            title={meal.recipeName}
+                          />
+                        </Card>
+                      </TouchableWithoutFeedback>
+                    </View>
+                  ))
               ) : (
-                <View className="w-full h-full flex justify-center items-center">
+                <View className="w-full h-screen flex justify-center items-center">
                   <TouchableWithoutFeedback className="mt-4 " onPress={() => getRecipes(userID)}>
                     <View className="flex justify-center items-center">
                       <Text className="text-4xl text-wlc-color">No Recipes Found</Text>

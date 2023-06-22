@@ -172,11 +172,11 @@ const NewRecipe = () => {
 
     // alert(recipeRef.id);
 
-    // dispatch(
-    //   SET_NAVIGATION_PAGE({
-    //     page: "HOME",
-    //   })
-    // );
+    dispatch(
+      SET_NAVIGATION_PAGE({
+        page: "HOME",
+      })
+    );
 
     clearInput(e);
     setIsLoading(false);
@@ -281,7 +281,6 @@ const NewRecipe = () => {
         },
       ]
     );
-    HandelPickImage();
   };
 
   const uploadImageAsync = async (uri) => {
