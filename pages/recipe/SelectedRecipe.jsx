@@ -2,14 +2,13 @@ import { View, Text, Keyboard, TouchableOpacity, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading, ScreenWrapper } from "./../../components";
-import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
-// import { selectMealID } from "../../redux/slices/searchMealSlices";
+import { SET_NAVIGATION_PAGE, selectRecipeUID } from "../../redux/slices/routeSlices";
 
 const SelectedRecipe = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [recipe, setRecipe] = useState();
-  // const mealID = useSelector(selectMealID);
+  const recipeUID = useSelector(selectRecipeUID);
 
   const getMeals = async () => {
     setIsLoading(false);
@@ -21,7 +20,6 @@ const SelectedRecipe = () => {
       .catch((error) => {
         // alert(error);
       });
-
     setIsLoading(false);
   };
 
@@ -59,6 +57,8 @@ const SelectedRecipe = () => {
               <Text className="text-xl m-auto">Add New Recipe</Text>
             </View>
           </View>
+
+          <Text>{recipeUID}</Text>
         </View>
       </ScreenWrapper>
       {isLoading ? <Loading /> : null}

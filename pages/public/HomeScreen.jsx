@@ -21,7 +21,10 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from "../../firebase";
-import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
+import {
+  SET_NAVIGATION_PAGE,
+  SET_SELECTED_RECIPE_WITH_NAVIGATION,
+} from "../../redux/slices/routeSlices";
 import { Card } from "react-native-paper";
 
 const HomeScreen = () => {
@@ -101,6 +104,16 @@ const HomeScreen = () => {
     setIsLoading(false);
   };
 
+  const handelGoToSelectedRecipePage = (id) => {
+    // alert(id);
+    dispatch(
+      SET_SELECTED_RECIPE_WITH_NAVIGATION({
+        page: "SelectedRecipe",
+        uid: id,
+      })
+    );
+  };
+
   return (
     <>
       <ScreenWrapper>
@@ -133,7 +146,12 @@ const HomeScreen = () => {
                   })
                   .map((meal, index) => (
                     <View className="m-1" key={index}>
-                      <TouchableWithoutFeedback className="mt-4" onPress={() => {}}>
+                      <TouchableWithoutFeedback
+                        className="mt-4"
+                        onPress={() => {
+                          handelGoToSelectedRecipePage(meal.uid);
+                        }}
+                      >
                         <Card className="mx-3">
                           <Card.Cover source={{ uri: meal.photoPath }} />
                           <Card.Title

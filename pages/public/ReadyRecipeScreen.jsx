@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
-import { Card, Paragraph } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
 
@@ -72,11 +72,6 @@ const ReadyRecipeScreen = () => {
 
   const handel = (mealID) => {
     setIsLoading(true);
-    // dispatch(
-    //   SET_MEAL_ID({
-    //     MealID: mealID,
-    //   })
-    // );
 
     dispatch(
       SET_NAVIGATION_PAGE({
