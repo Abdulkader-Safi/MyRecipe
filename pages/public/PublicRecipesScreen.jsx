@@ -11,9 +11,6 @@ const PublicRecipesScreen = () => {
   const [recipes, setRecipes] = useState([]);
   const scrollRef = useRef();
 
-
-
-
   const HandelGoTopPage = () => {
     setIsLoading(true);
     scrollRef.current?.scrollTo({
