@@ -1,14 +1,26 @@
-import { View, Text, TextInput, Keyboard, ScrollView, TouchableOpacity, Image, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Keyboard,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React, { useRef, useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Card, Paragraph } from "react-native-paper";
+import { SET_SELECTED_RECIPE_WITH_NAVIGATION } from "../../redux/slices/routeSlices";
+import { useDispatch } from "react-redux";
 
 const PublicRecipesScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const dispatch = useDispatch();
   const scrollRef = useRef();
 
   const HandelGoTopPage = () => {
@@ -28,16 +40,26 @@ const PublicRecipesScreen = () => {
     const querySnapshot = await getDocs(q);
     setRecipes([]);
     querySnapshot.forEach((doc) => {
-      setRecipes((recipes) => [...recipes, doc.data()]);
+      setRecipes((recipes) => [...recipes, { id: doc.id, ...doc.data() }]);
     });
     setIsLoading(false);
+  };
+
+  const handelGoToSelectedRecipePage = (id) => {
+    // alert(id);
+    dispatch(
+      SET_SELECTED_RECIPE_WITH_NAVIGATION({
+        page: "SelectedRecipe",
+        uid: id,
+      })
+    );
   };
 
   return (
     <>
       <ScreenWrapper>
         <View className="h-screen w-screen flex items-center bg-bg-color">
-        <View className="w-11/12 mb-14 justify-around absolute top-0.5 z-10">
+          <View className="w-11/12 mb-14 justify-around absolute top-0.5 z-10">
             <View className="flex flex-row w-12/12 justify-center items-center mt-2">
               <TextInput
                 placeholder="Search..."
@@ -65,7 +87,12 @@ const PublicRecipesScreen = () => {
                   })
                   .map((meal, index) => (
                     <View className="m-1" key={index}>
-                      <TouchableWithoutFeedback className="mt-4" onPress={() => {}}>
+                      <TouchableWithoutFeedback
+                        className="mt-4"
+                        onPress={() => {
+                          handelGoToSelectedRecipePage(meal.id);
+                        }}
+                      >
                         <Card className="mx-3">
                           <Card.Cover source={{ uri: meal.photoPath }} />
                           <Card.Title

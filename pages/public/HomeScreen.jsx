@@ -81,7 +81,7 @@ const HomeScreen = () => {
     const querySnapshot = await getDocs(q);
     setRecipes([]);
     querySnapshot.forEach((doc) => {
-      setRecipes((recipes) => [...recipes, doc.data()]);
+      setRecipes((recipes) => [...recipes, { id: doc.id, ...doc.data() }]);
     });
     setIsLoading(false);
   };
@@ -149,7 +149,8 @@ const HomeScreen = () => {
                       <TouchableWithoutFeedback
                         className="mt-4"
                         onPress={() => {
-                          handelGoToSelectedRecipePage(meal.uid);
+                          handelGoToSelectedRecipePage(meal.id);
+                          // console.log(meal);
                         }}
                       >
                         <Card className="mx-3">
