@@ -24,7 +24,6 @@ const ReadyRecipeScreen = () => {
   const dispatch = useDispatch();
 
   // Public Meals API
-
   const getMeals = async () => {
     setIsLoading1(true);
     const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -49,6 +48,7 @@ const ReadyRecipeScreen = () => {
     const response = await fetch(url);
     const data = await response.json();
     setSelectedCategory(data.meals);
+    setSearchQuery("");
     setDisplaySelectedCategory(true);
     setIsLoading(false);
     scrollRef.current?.scrollTo({
@@ -63,6 +63,7 @@ const ReadyRecipeScreen = () => {
     setIsLoading(true);
     setDisplaySelectedCategory(false);
     setMainPage(true);
+    setSearchQuery("");
     setIsLoading(false);
     scrollRef.current?.scrollTo({
       y: 0,
@@ -93,11 +94,11 @@ const ReadyRecipeScreen = () => {
         </View>
       ) : (
         <ScreenWrapper>
-          <View className="h-screen flex justify-around items-center bg-bg-color">
-            <View className="w-11/12 mb-14 justify-around">
+          <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
+            <View className="w-11/12 mb-14 justify-around absolute top-0.5 z-10">
               <View className="flex flex-row w-12/12 justify-center items-center mt-2">
                 <TouchableOpacity
-                  className="flex justify-center items-center p-3.5 rounded-2xl border-2 border-input-border bg-wlc-color"
+                  className="flex justify-center items-center p-3.5 rounded-2xl border-2 border-input-border bg-wlc-color z-10"
                   onPress={HandleGoBackHome}
                 >
                   <Image source={require("./../../assets/icons/double-left.png")} />
@@ -110,40 +111,49 @@ const ReadyRecipeScreen = () => {
                   className="w-11/12 p-3 rounded-2xl border-2 border-input-border bg-wlc-color"
                 />
               </View>
+            </View>
 
-              <ScrollView className="" ref={scrollRef}>
+            <View className="w-full items-center">
+              <ScrollView className="w-full mt-16 mb-12 rounded-3xl" ref={scrollRef}>
                 {displaySelectedCategory
-                  ? selectedCategory.map((meal) => (
-                      <View className="m-1" key={meal.idMeal}>
-                        <TouchableWithoutFeedback
-                          key={meal.idMeal}
-                          className="mt-4"
-                          onPress={() => handel(meal.idMeal)}
-                        >
-                          <Card key={meal.idMeal}>
-                            <Card.Cover source={{ uri: meal.strMealThumb }} />
-                            <Card.Title title={meal.strMeal} />
-                          </Card>
-                        </TouchableWithoutFeedback>
-                      </View>
-                    ))
-                  : meals.map((meal) => (
-                      <View className="m-1" key={meal.idCategory}>
-                        <TouchableWithoutFeedback
-                          key={meal.idCategory}
-                          className="mt-4"
-                          onPress={() => handelRequestedType(meal.strCategory)}
-                        >
-                          <Card key={meal.idCategory}>
-                            <Card.Cover source={{ uri: meal.strCategoryThumb }} />
-                            <Card.Title title={meal.strCategory} />
-                            <Card.Content>
-                              <Paragraph>{meal.strCategoryDescription}</Paragraph>
-                            </Card.Content>
-                          </Card>
-                        </TouchableWithoutFeedback>
-                      </View>
-                    ))}
+                  ? selectedCategory
+                      // .filter((meal) => {
+                      //   return searchQuery.toLowerCase() === ""
+                      //     ? meal
+                      //     : meal.strMeal.toLowerCase().includes(searchQuery);
+                      // })
+                      .map((meal, index) => (
+                        <View className="m-1" key={index}>
+                          <TouchableWithoutFeedback
+                            className="mt-4"
+                            onPress={() => handel(meal.idMeal)}
+                          >
+                            <Card className="mx-3">
+                              <Card.Cover source={{ uri: meal.strMealThumb }} />
+                              <Card.Title title={meal.strMeal} />
+                            </Card>
+                          </TouchableWithoutFeedback>
+                        </View>
+                      ))
+                  : meals
+                      // .filter((meal) => {
+                      //   return searchQuery.toLowerCase() === ""
+                      //     ? meal
+                      //     : meal.strCategory.toLowerCase().includes(searchQuery);
+                      // })
+                      .map((meal, index) => (
+                        <View className="m-1" key={index}>
+                          <TouchableWithoutFeedback
+                            className="mt-4"
+                            onPress={() => handelRequestedType(meal.strCategory)}
+                          >
+                            <Card className="mx-3">
+                              <Card.Cover source={{ uri: meal.strCategoryThumb }} />
+                              <Card.Title title={meal.strCategory} />
+                            </Card>
+                          </TouchableWithoutFeedback>
+                        </View>
+                      ))}
               </ScrollView>
             </View>
           </View>

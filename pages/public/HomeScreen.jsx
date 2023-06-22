@@ -106,7 +106,7 @@ const HomeScreen = () => {
     <>
       <ScreenWrapper>
         <View className="h-screen w-screen flex justify-around items-center bg-bg-color">
-          <View className="w-11/12 mb-14 justify-around absolute top-0.5">
+          <View className="w-11/12 mb-14 justify-around absolute top-0.5 z-10">
             <View className="flex flex-row w-12/12 justify-center items-center mt-2">
               <TextInput
                 placeholder="Search..."
@@ -115,7 +115,7 @@ const HomeScreen = () => {
                 className="w-11/12 p-3 rounded-2xl border-2 border-input-border bg-wlc-color"
               />
               <TouchableOpacity
-                className="flex justify-center items-center p-3.5 rounded-2xl border-2 border-input-border bg-wlc-color"
+                className="flex justify-center items-center p-3.5 rounded-2xl border-2 border-input-border bg-wlc-color z-10"
                 onPress={HandelNewRecipe}
               >
                 <Image source={require("./../../assets/icons/add.png")} />
@@ -123,13 +123,13 @@ const HomeScreen = () => {
             </View>
           </View>
           <View className="w-full items-center">
-            <ScrollView className="w-11/12 mt-20 mb-8 rounded-3xl" ref={scrollRef}>
+            <ScrollView className="w-full mt-16 mb-12 rounded-3xl" ref={scrollRef}>
               {recipes ? (
                 recipes.map((meal, index) => (
                   <>
-                    <View className="m-1" key={meal.idCategory}>
-                      <TouchableWithoutFeedback className="mt-4" onPress={() => {}} key={index}>
-                        <Card>
+                    <View className="m-1" key={index}>
+                      <TouchableWithoutFeedback className="mt-4" onPress={() => {}}>
+                        <Card className="mx-3">
                           <Card.Cover source={{ uri: meal.photoPath }} />
                           <Card.Title
                             className=" flex justify-center items-center"
