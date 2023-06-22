@@ -14,6 +14,7 @@ import AuthEmailSent from "./auth/MessagesPage/AuthEmailSent";
 // Recipe
 import NewRecipe from "./recipe/NewRecipe";
 import SelectedRecipe from "./recipe/SelectedRecipe";
+import SelectedRecipeAPI from "./recipe/SelectedRecipeAPI";
 
 export {
   Welcome,
@@ -28,4 +29,5 @@ export {
   About,
   NewRecipe,
   SelectedRecipe,
+  SelectedRecipeAPI,
 };
