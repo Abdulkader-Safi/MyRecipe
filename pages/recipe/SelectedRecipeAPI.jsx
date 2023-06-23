@@ -12,8 +12,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading, ScreenWrapper } from "./../../components";
 import { SET_NAVIGATION_PAGE, selectRecipeUID } from "../../redux/slices/routeSlices";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 
 const SelectedRecipe = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -89,33 +87,16 @@ const SelectedRecipe = () => {
   const [preparations, setPreparations] = useState("");
 
   useEffect(() => {
-    setIsLoading(true);
     getMeals();
-  }, []);
-
-  // const getMeals = async () => {
-  //   setIsLoading1(true);
-  //   const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-  //   setMeals(data.categories);
-  //   setIsLoading1(false);
-  //   scrollRef.current?.scrollTo({
-  //     y: 0,
-  //   });
-  // };
+  }, [recipeName]);
 
   const getMeals = async () => {
+    setIsLoading(true);
+
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeUID}`;
     const response = await fetch(url);
     const data = await response.json();
-    setMeal([]);
     setMeal(data.meals[0]);
-
-    // alert(recipeUID);
-    //   const recipeRef = doc(db, "Recipe", recipeUID);
-    //   const getRecipeData = getDoc(recipeRef);
-    //   const recipeData = (await getRecipeData).data();
 
     console.log(meal);
     setPhotoPath(meal.strMealThumb);
