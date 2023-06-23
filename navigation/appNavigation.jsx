@@ -13,6 +13,7 @@ import {
   NewRecipe,
   SelectedRecipe,
   About,
+  SelectedRecipeAPI,
 } from "../pages";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -31,11 +32,7 @@ const AppNavigation = () => {
     navPage === "About" ? (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="About">
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="About"
-            component={About}
-          />
+          <Stack.Screen options={{ headerShown: false }} name="About" component={About} />
         </Stack.Navigator>
       </NavigationContainer>
     ) : navPage === "HOME" ? (
@@ -105,6 +102,16 @@ const AppNavigation = () => {
             options={{ headerShown: false }}
             name="SelectedRecipe"
             component={SelectedRecipe}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    ) : navPage === "SelectedRecipeAPI" ? (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SelectedRecipeAPI">
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="SelectedRecipeAPI"
+            component={SelectedRecipeAPI}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -57,12 +57,12 @@ const About = () => {
 
             <View className="my-16">
               <Text className="">Supervised By:</Text>
-              <Text className="text-3xl">Dr. Samar Allosh</Text>
+              <Text className="text-3xl">Dr. Samar Allouch</Text>
             </View>
 
             <View className="my-16">
               <Text className="">Dean of science department:</Text>
-              <Text className="text-3xl">Dr. Azza Dib Assil</Text>
+              <Text className="text-3xl">Dr. Azza Dib</Text>
             </View>
 
             <View className="my-16">

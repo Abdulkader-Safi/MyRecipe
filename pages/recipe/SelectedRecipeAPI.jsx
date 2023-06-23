@@ -21,6 +21,8 @@ const SelectedRecipe = () => {
   const scrollRef = useRef();
   const recipeUID = useSelector(selectRecipeUID);
 
+  const [meal, setMeal] = useState([]);
+
   const [photoPath, setPhotoPath] = useState("");
   const [recipeName, SetRecipeName] = useState("");
 
@@ -91,57 +93,79 @@ const SelectedRecipe = () => {
     getMeals();
   }, []);
 
+  // const getMeals = async () => {
+  //   setIsLoading1(true);
+  //   const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+  //   const response = await fetch(url);
+  //   const data = await response.json();
+  //   setMeals(data.categories);
+  //   setIsLoading1(false);
+  //   scrollRef.current?.scrollTo({
+  //     y: 0,
+  //   });
+  // };
+
   const getMeals = async () => {
-    const recipeRef = doc(db, "Recipe", recipeUID);
-    const getRecipeData = getDoc(recipeRef);
-    const recipeData = (await getRecipeData).data();
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeUID}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    setMeal([]);
+    setMeal(data.meals[0]);
 
-    setPhotoPath(recipeData.photoPath);
-    SetRecipeName(recipeData.recipeName);
-    SetIngredients01(recipeData.ingredients01);
-    SetIngredients02(recipeData.ingredients02);
-    SetIngredients03(recipeData.ingredients03);
-    SetIngredients04(recipeData.ingredients04);
-    SetIngredients05(recipeData.ingredients05);
-    SetIngredients06(recipeData.ingredients06);
-    SetIngredients07(recipeData.ingredients07);
-    SetIngredients08(recipeData.ingredients08);
-    SetIngredients09(recipeData.ingredients09);
-    SetIngredients10(recipeData.ingredients10);
-    SetIngredients11(recipeData.ingredients11);
-    SetIngredients12(recipeData.ingredients12);
-    SetIngredients13(recipeData.ingredients13);
-    SetIngredients14(recipeData.ingredients14);
-    SetIngredients15(recipeData.ingredients15);
-    SetIngredients16(recipeData.ingredients16);
-    SetIngredients17(recipeData.ingredients17);
-    SetIngredients18(recipeData.ingredients18);
-    SetIngredients19(recipeData.ingredients19);
-    SetIngredients20(recipeData.ingredients20);
+    // alert(recipeUID);
+    //   const recipeRef = doc(db, "Recipe", recipeUID);
+    //   const getRecipeData = getDoc(recipeRef);
+    //   const recipeData = (await getRecipeData).data();
 
-    SetMeasure01(recipeData.measure01);
-    SetMeasure02(recipeData.measure02);
-    SetMeasure03(recipeData.measure03);
-    SetMeasure04(recipeData.measure04);
-    SetMeasure05(recipeData.measure05);
-    SetMeasure06(recipeData.measure06);
-    SetMeasure07(recipeData.measure07);
-    SetMeasure08(recipeData.measure08);
-    SetMeasure09(recipeData.measure09);
-    SetMeasure10(recipeData.measure10);
-    SetMeasure11(recipeData.measure11);
-    SetMeasure12(recipeData.measure12);
-    SetMeasure13(recipeData.measure13);
-    SetMeasure14(recipeData.measure14);
-    SetMeasure15(recipeData.measure15);
-    SetMeasure16(recipeData.measure16);
-    SetMeasure17(recipeData.measure17);
-    SetMeasure18(recipeData.measure18);
-    SetMeasure19(recipeData.measure19);
-    SetMeasure20(recipeData.measure20);
+    console.log(meal);
+    setPhotoPath(meal.strMealThumb);
+    SetRecipeName(meal.strMeal);
+    SetIngredients01(meal.strIngredient1);
+    SetIngredients02(meal.strIngredient2);
+    SetIngredients03(meal.strIngredient3);
+    SetIngredients04(meal.strIngredient4);
+    SetIngredients05(meal.strIngredient5);
+    SetIngredients06(meal.strIngredient6);
+    SetIngredients07(meal.strIngredient7);
+    SetIngredients08(meal.strIngredient8);
+    SetIngredients09(meal.strIngredient9);
+    SetIngredients10(meal.strIngredient10);
+    SetIngredients11(meal.strIngredient11);
+    SetIngredients12(meal.strIngredient12);
+    SetIngredients13(meal.strIngredient13);
+    SetIngredients14(meal.strIngredient14);
+    SetIngredients15(meal.strIngredient15);
+    SetIngredients16(meal.strIngredient16);
+    SetIngredients17(meal.strIngredient17);
+    SetIngredients18(meal.strIngredient18);
+    SetIngredients19(meal.strIngredient19);
+    SetIngredients20(meal.strIngredient20);
 
-    setPreparations(recipeData.preparations);
+    SetMeasure01(meal.strMeasure1);
+    SetMeasure02(meal.strMeasure2);
+    SetMeasure03(meal.strMeasure3);
+    SetMeasure04(meal.strMeasure4);
+    SetMeasure05(meal.strMeasure5);
+    SetMeasure06(meal.strMeasure6);
+    SetMeasure07(meal.strMeasure7);
+    SetMeasure08(meal.strMeasure8);
+    SetMeasure09(meal.strMeasure9);
+    SetMeasure10(meal.strMeasure10);
+    SetMeasure11(meal.strMeasure11);
+    SetMeasure12(meal.strMeasure12);
+    SetMeasure13(meal.strMeasure13);
+    SetMeasure14(meal.strMeasure14);
+    SetMeasure15(meal.strMeasure15);
+    SetMeasure16(meal.strMeasure16);
+    SetMeasure17(meal.strMeasure17);
+    SetMeasure18(meal.strMeasure18);
+    SetMeasure19(meal.strMeasure19);
+    SetMeasure20(meal.strMeasure20);
 
+    setPreparations(meal.strInstructions);
+    scrollRef.current?.scrollTo({
+      y: 0,
+    });
     setIsLoading(false);
   };
 

@@ -10,7 +10,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Loading, ScreenWrapper } from "../../components";
 import { Card } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { SET_NAVIGATION_PAGE } from "../../redux/slices/routeSlices";
+import {
+  SET_SELECTED_RECIPE_WITH_NAVIGATION,
+} from "../../redux/slices/routeSlices";
 
 const ReadyRecipeScreen = () => {
   const scrollRef = useRef();
@@ -70,12 +72,13 @@ const ReadyRecipeScreen = () => {
     });
   };
 
-  const handel = (mealID) => {
+  const handelSelectedRecipe = (mealID) => {
     setIsLoading(true);
 
     dispatch(
-      SET_NAVIGATION_PAGE({
-        page: "SelectedRecipe",
+      SET_SELECTED_RECIPE_WITH_NAVIGATION({
+        page: "SelectedRecipeAPI",
+        uid: mealID,
       })
     );
     setIsLoading(false);
@@ -122,7 +125,10 @@ const ReadyRecipeScreen = () => {
                         <View className="m-1" key={index}>
                           <TouchableWithoutFeedback
                             className="mt-4"
-                            onPress={() => handel(meal.idMeal)}
+                            onPress={() => {
+                              handelSelectedRecipe(meal.idMeal);
+                              // alert(meal.idMeal);
+                            }}
                           >
                             <Card className="mx-3">
                               <Card.Cover source={{ uri: meal.strMealThumb }} />
