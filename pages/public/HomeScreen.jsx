@@ -7,6 +7,7 @@ import {
   ScrollView,
   Keyboard,
   Text,
+  Alert,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { Loading, ScreenWrapper } from "./../../components";
@@ -19,13 +20,14 @@ import {
 } from "../../redux/slices/authSlices";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { collection, deleteDoc, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { auth, db, storage } from "../../firebase";
 import {
   SET_NAVIGATION_PAGE,
   SET_SELECTED_RECIPE_WITH_NAVIGATION,
 } from "../../redux/slices/routeSlices";
 import { Card } from "react-native-paper";
+import { deleteObject, ref } from "firebase/storage";
 
 const HomeScreen = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -114,6 +116,41 @@ const HomeScreen = () => {
     );
   };
 
+  const handelDeleteRecipe = (meal) => {
+    return Alert.alert(
+      "Delete Recipe",
+      `Are you sure you want to delete (${meal.recipeName}) recipe`,
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            deleteRecipe(meal);
+          },
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
+
+  const deleteRecipe = async (meal) => {
+    setIsLoading(true);
+    const deleteRef = ref(storage, meal.photoPath);
+
+    try {
+      await deleteDoc(doc(db, "Recipe", meal.id));
+      await deleteObject(deleteRef);
+    } catch (error) {
+      alert(`Error: ${error}`);
+    }
+    setIsLoading(false);
+    getRecipes(userID);
+  };
+
   return (
     <>
       <ScreenWrapper>
@@ -150,7 +187,9 @@ const HomeScreen = () => {
                         className="mt-4"
                         onPress={() => {
                           handelGoToSelectedRecipePage(meal.id);
-                          // console.log(meal);
+                        }}
+                        onLongPress={() => {
+                          handelDeleteRecipe(meal);
                         }}
                       >
                         <Card className="mx-3">
