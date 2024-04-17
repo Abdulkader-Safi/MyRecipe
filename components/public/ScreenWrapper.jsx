@@ -1,5 +1,5 @@
-import { Platform } from "react-native";
 import React from "react";
+import { Platform } from "react-native";
 
 const SafeArea = Platform.select({
   ios: () => require("react-native").SafeAreaView,
